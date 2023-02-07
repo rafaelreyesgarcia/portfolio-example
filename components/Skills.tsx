@@ -25,6 +25,6 @@ export default function Skills({}: Props) {
         <Skill />
       </div>
     </motion.div>
-    
+
   )
 }
