@@ -5,6 +5,9 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Experience from '@/components/Experience';
 import Skills from '@/components/Skills';
+import Projects from '@/components/Projects';
+import Contact from '@/components/Contact';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   return (
@@ -13,7 +16,9 @@ const Home: NextPage = () => {
       className="
         text-white bg-[#111]
         h-screen snap-y snap-mandatory
-        overflow-scroll z-0"
+        overflow-y-scroll z-0 overflow-x-hidden
+        scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#f7ab8a]/80
+      "
     >
       <Head>
         <title>Create Next App</title>
@@ -45,8 +50,34 @@ const Home: NextPage = () => {
       </section>
 
       {/* projects */}
+      <section id='projects' className='snap-start'>
+        <Projects />
+      </section>
 
       {/* contact me */}
+      <section id='contact' className='snap-start'>
+        <Contact />
+      </section>
+
+      <Link href="#hero">
+        <footer
+          className='
+            sticky bottom-5 w-full cursor-pointer
+          '
+        >
+          <div className='flex items-center justify-center'>
+            <img
+              src="/logo.jpg"
+              alt=""
+              className='
+                h-10 w-10 rounded-full
+                filter grayscale opacity-40
+                hover:grayscale-0 hover:opacity-100
+              '
+            />
+          </div>
+        </footer>
+      </Link>
     </div>
   )
 }
