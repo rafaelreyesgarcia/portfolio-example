@@ -1,9 +1,13 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { Experience } from '@/typings'
+import { urlFor } from '@/sanity'
 
-type Props = {}
+type Props = {
+  experience: Experience
+}
 
-export default function ExperienceCard({}: Props) {
+export default function ExperienceCard({experience}: Props) {
   return (
     <article
       className='
@@ -23,24 +27,32 @@ export default function ExperienceCard({}: Props) {
         className='
           w-32 h-32 rounded-full object-cover object-center
           xl:w-[200px] xl:h-[200px]'
-        src="/company.webp"
+        src={urlFor(experience?.companyImage).url()}
         alt=""
       />
       <div className='px-0 md:px-10'>
         <h4 className='text-4xl font-light'>Advertising</h4>
         <p className='font-bold text-2xl mt-1'>Upwork</p>
         <div className='flex gap-2 space-x-2 my-2'>
-          {/* tech used */}
-          <img src="/js.png" alt="" className='h-10 w-10' />
-          <img src="/html.png" alt="" className='h-10 w-10' />
-          <img src="/css.png" alt="" className='h-10 w-10' />
+          {experience.technologies.map((technology) => (
+            <img
+              key={technology._id}
+              src={urlFor(technology.image).url()}
+              className='h-10 w-10 rounded-full object-cover'
+            />
+          ))}
         </div>
-        <p className='uppercase py-5 text-gray-300'>started - ended - </p>
+        <p className='uppercase py-5 text-gray-300'>
+          {new Date(experience.dataStarted).toDateString()} -{" "}
+          {experience.isCurrentlyWorkingHere
+            ? "Present"
+            : new Date(experience.dateEnded).toDateString()}
+        </p>
 
-        <ul className='list-disc space-y-4'>
-          <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur, amet?</li>
-          <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur, amet?</li>
-          <li>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur, amet?</li>
+        <ul className='list-disc space-y-4 ml-5'>
+          {experience.points.map((point, i) => (
+            <li key={i}>{point}</li>
+          ))}
         </ul>
       </div>
     </article>

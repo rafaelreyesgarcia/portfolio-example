@@ -1,9 +1,13 @@
 import React from 'react'
 import { motion } from "framer-motion"
+import { PageInfo } from '@/typings'
+import { urlFor } from '@/sanity'
 
-type Props = {}
+type Props = {
+  pageInfo: PageInfo
+}
 
-export default function About({}: Props) {
+export default function About({pageInfo}: Props) {
   return (
     <motion.div
       initial={{
@@ -25,7 +29,7 @@ export default function About({}: Props) {
       </h3>
       <div className='flex items-center mt-28'>
         <motion.img
-          src='/portrait.jpg'
+          src={urlFor(pageInfo?.profilePic).url()}
           alt='about photo'
           initial={{
             x: -200,
@@ -45,7 +49,9 @@ export default function About({}: Props) {
         />
         <div className='space-y-10 px-0 md:px-10'>
           <h4 className='text-4xl font-semibold'>Here's a <span className='underline decoration-[#F7AB8A]/50'>little</span> background</h4>
-          <p className='text-base'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat dignissimos quas ab debitis distinctio, libero ex nobis quia quidem consequatur!</p>
+          <p className='text-base'>
+            {pageInfo?.backgroundInformation}
+          </p>
         </div>
       </div>
     </motion.div>
