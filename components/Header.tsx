@@ -2,10 +2,13 @@ import React from 'react'
 import { SocialIcon } from 'react-social-icons';
 import { motion } from "framer-motion";
 import Link from 'next/link';
+import { Social } from '@/typings';
 
-type Props = {}
+type Props = {
+  socials: Social[]
+}
 
-export default function Header({}: Props) {
+export default function Header({socials}: Props) {
   return (
     <header
       className='
@@ -34,6 +37,14 @@ export default function Header({}: Props) {
           flex flex-row items-center'
       >
         {/* social icons */}
+        {socials.map((social) => (
+          <SocialIcon
+            key={social._id}
+            url="twitter.com"
+            fgColor='gray'
+            bgColor='transparent'
+          />
+        ))}
         <SocialIcon
           url="twitter.com"
           fgColor='gray'
